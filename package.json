@@ -1,0 +1,17 @@
+{
+  "name": "app-organiser",
+  "version": "1.0.0",
+  "description": "Mobile App Organiser",
+  "scripts": {
+    "build": "echo 'No build step needed for static files'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
+    "@capacitor/cli": "^5.0.0"
+  }
+}

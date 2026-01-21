@@ -1,0 +1,6 @@
+{
+    "appId": "com.organiser.app",
+    "appName": "App Organiser",
+    "webDir": "public",
+    "bundledWebRuntime": false
+}
