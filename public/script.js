@@ -103,31 +103,71 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Presets
+    // --- Mega List Presets ---
     const appPresets = [
+        // Social & Communication
         { name: 'WhatsApp', url: 'whatsapp://', color: 'linear-gradient(135deg, #25D366, #128C7E)' },
         { name: 'Instagram', url: 'instagram://', color: 'linear-gradient(135deg, #833AB4, #FD1D1D)' },
         { name: 'Facebook', url: 'fb://', color: 'linear-gradient(135deg, #1877F2, #0055FF)' },
-        { name: 'YouTube', url: 'vnd.youtube://', color: 'linear-gradient(135deg, #FF0000, #CC0000)' },
+        { name: 'Messenger', url: 'fb-messenger://', color: 'linear-gradient(135deg, #00B2FF, #006AFF)' },
+        { name: 'Telegram', url: 'tg://', color: 'linear-gradient(135deg, #29B6F6, #0288D1)' },
+        { name: 'Snapchat', url: 'snapchat://', color: 'linear-gradient(135deg, #FFFC00, #F4D03F)' },
         { name: 'Twitter/X', url: 'twitter://', color: 'linear-gradient(135deg, #1DA1F2, #14171A)' },
+        { name: 'LinkedIn', url: 'linkedin://', color: 'linear-gradient(135deg, #0077B5, #005E93)' },
+        { name: 'Discord', url: 'discord://', color: 'linear-gradient(135deg, #5865F2, #404EED)' },
+        { name: 'TikTok', url: 'snssdk1233://', color: 'linear-gradient(135deg, #000000, #25F4EE)' }, // Common TikTok scheme
+
+        // Google & Tools
+        { name: 'YouTube', url: 'vnd.youtube://', color: 'linear-gradient(135deg, #FF0000, #B31217)' },
         { name: 'Gmail', url: 'googlegmail://', color: 'linear-gradient(135deg, #EA4335, #D93025)' },
-        { name: 'Telegram', url: 'tg://', color: 'linear-gradient(135deg, #0088cc, #005f8f)' },
-        { name: 'Spotify', url: 'spotify://', color: 'linear-gradient(135deg, #1DB954, #191414)' }
+        { name: 'Maps', url: 'geo:0,0', color: 'linear-gradient(135deg, #34A853, #1EA362)' },
+        { name: 'Chrome', url: 'googlechrome://', color: 'linear-gradient(135deg, #4285F4, #34A853)' },
+        { name: 'Photos', url: 'googlephotos://', color: 'linear-gradient(135deg, #FBBC05, #EA4335)' },
+        { name: 'Drive', url: 'googledrive://', color: 'linear-gradient(135deg, #1EA362, #4285F4)' },
+
+        // System (Using Intents where possible)
+        { name: 'Phone', url: 'tel:', color: 'linear-gradient(135deg, #4CAF50, #2E7D32)' },
+        { name: 'Messages', url: 'sms:', color: 'linear-gradient(135deg, #2196F3, #1976D2)' },
+        { name: 'Settings', url: 'intent:#Intent;action=android.settings.SETTINGS;end', color: 'linear-gradient(135deg, #9E9E9E, #616161)' },
+        { name: 'Camera', url: 'intent:#Intent;action=android.media.action.IMAGE_CAPTURE;end', color: 'linear-gradient(135deg, #607D8B, #455A64)' },
+        { name: 'Calculator', url: 'calculator:', color: 'linear-gradient(135deg, #FF9800, #F57C00)' }, /* May vary by OEM */
+        { name: 'Clock', url: 'intent:#Intent;action=android.intent.action.SHOW_ALARMS;end', color: 'linear-gradient(135deg, #3F51B5, #303F9F)' },
+
+        // Entertainment & Games
+        { name: 'Spotify', url: 'spotify://', color: 'linear-gradient(135deg, #1DB954, #191414)' },
+        { name: 'Netflix', url: 'nflx://', color: 'linear-gradient(135deg, #E50914, #B81D24)' },
+        { name: 'Twitch', url: 'twitch://', color: 'linear-gradient(135deg, #9146FF, #6441A5)' },
+        { name: 'PUBG Mobile', url: 'pubgmobile://', color: 'linear-gradient(135deg, #F39C12, #D35400)' },
+        { name: 'Call of Duty', url: 'codm://', color: 'linear-gradient(135deg, #2C3E50, #000000)' },
+        { name: 'Roblox', url: 'roblox://', color: 'linear-gradient(135deg, #E74C3C, #C0392B)' },
+
+        // Shopping & Finance
+        { name: 'Amazon', url: 'com.amazon.mobile.shopping.web://', color: 'linear-gradient(135deg, #FF9900, #FF6600)' },
+        { name: 'PayPal', url: 'paypal://', color: 'linear-gradient(135deg, #003087, #009CDE)' },
+        { name: 'Paytm', url: 'paytm://', color: 'linear-gradient(135deg, #002E6E, #00B9F5)' },
+        { name: 'GPay', url: 'gpay://', color: 'linear-gradient(135deg, #4285F4, #34A853)' } // Varies, mostly deep links
     ];
 
     const presetContainer = document.createElement('div');
     presetContainer.id = 'preset-container';
     presetContainer.style.marginBottom = '20px';
-    presetContainer.innerHTML = '<label style="display:block;color:var(--text-secondary);margin-bottom:8px;font-size:14px;">Quick Add Popular App</label>';
+    presetContainer.innerHTML = '<label style="display:block;color:var(--text-secondary);margin-bottom:8px;font-size:14px;">Quick Select App</label>';
 
     const presetScroll = document.createElement('div');
     presetScroll.className = 'preset-scroll';
-    // Add CSS for this dynamically or in style.css, doing inline for speed now but better in style.tbd
-    // Let's rely on class in style.css, I will add it there next.
+    // Style update: grid flow for better visibility
+    presetScroll.style.display = 'grid';
+    presetScroll.style.gridTemplateColumns = 'repeat(auto-fill, minmax(80px, 1fr))';
+    presetScroll.style.gap = '8px';
+    presetScroll.style.maxHeight = '150px';
+    presetScroll.style.overflowY = 'auto';
+    presetScroll.style.padding = '4px';
 
     appPresets.forEach(preset => {
         const chip = document.createElement('div');
         chip.className = 'preset-chip';
+        chip.style.textAlign = 'center';
+        chip.style.justifyContent = 'center';
         chip.innerText = preset.name;
         chip.onclick = () => {
             nameInput.value = preset.name;
